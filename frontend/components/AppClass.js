@@ -4,7 +4,7 @@ export default class AppClass extends React.Component {
 
   state = {
     message: '',
-    moves: '',
+    moves: 0,
     grid: ['', '', '', '', '', '', '', '', '']
   }
 
@@ -17,15 +17,8 @@ export default class AppClass extends React.Component {
           <h3 id="steps">You moved 0 times</h3>
         </div>
         <div id="grid">
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square active">B</div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
-          <div className="square"></div>
+          {this.state.grid.map((letter, index) => <div key={index} className="square">{letter}</div>)}
+          {/* <div className="square active">B</div> */}
         </div>
         <div className="info">
           <h3 id="message"></h3>
