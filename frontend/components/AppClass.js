@@ -77,10 +77,10 @@ export default class AppClass extends React.Component {
       <div id="wrapper" className={className}>
         <div className="info">
           <h3 id="coordinates">Coordinates (2, 2)</h3>
-          <h3 id="steps">{`You moved ${this.state.moves} times`}</h3>
+          <h3 id="steps">{this.state.moves === 1 ? `You moved ${this.state.moves} time` : `You moved ${this.state.moves} times`}</h3>
         </div>
         <div id="grid">
-          {this.state.grid.map((letter, index) => <div key={index} className="square">{letter}</div>)}
+          {this.state.grid.map((letter, index) => letter ? <div className="square active">{letter}</div> : <div key={index} className="square">{letter}</div>)}
           {/* <div className="square active">B</div> */}
         </div>
         <div className="info">
