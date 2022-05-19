@@ -37,29 +37,37 @@ export default class AppClass extends React.Component {
     }
   }
 
-// } else if (this.state.activeSquare === 1) {
-//   return this.setActiveSquare(0);
-// } else if (this.state.activeSquare === 2) {
-//   return this.setActiveSquare(1)
-// } else if (this.state.activeSquare === 4) {
-//   return this.setActiveSquare(3)
-// } else if (this.state.activeSquare === 5) {
-//   return this.setActiveSquare(4)
-// } else if (this.state.activeSquare === 7) {
-//   return this.setActiveSquare(6)
-// } else if (this.state.activeSquare === 8) {
-//   return this.setActiveSquare(7)
-
   handlePlayerMoveUp = () => {
-
+    if (this.state.activeSquare === 0 || this.state.activeSquare === 1 || this.state.activeSquare === 2) {
+      return this.setState({
+        ...this.state,
+        message: `You can't go up`
+      })
+    } else {
+      return this.setActiveSquare(this.state.activeSquare - 3);
+    }
   }
 
   handlePlayerMoveRight = () => {
-
+    if (this.state.activeSquare === 2 || this.state.activeSquare === 5 || this.state.activeSquare === 8) {
+      return this.setState({
+        ...this.state,
+        message: `You can't go right`
+      })
+    } else {
+      return this.setActiveSquare(this.state.activeSquare + 1);
+    }
   }
 
   handlePlayerMoveDown = () => {
-
+    if (this.state.activeSquare === 6 || this.state.activeSquare === 7 || this.state.activeSquare === 8) {
+      return this.setState({
+        ...this.state,
+        message: `You can't go down`
+      })
+    } else {
+      return this.setActiveSquare(this.state.activeSquare + 3);
+    }
   }
 
   render() {
@@ -76,7 +84,7 @@ export default class AppClass extends React.Component {
           {/* <div className="square active">B</div> */}
         </div>
         <div className="info">
-          <h3 id="message"></h3>
+          <h3 id="message">{this.state.message}</h3>
         </div>
         <div id="keypad">
           <button id="left" onClick={this.handlePlayerMoveLeft}>LEFT</button>
