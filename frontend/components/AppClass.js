@@ -1,17 +1,14 @@
 import React from 'react'
 
 export default class AppClass extends React.Component {
-
-  state = {
+  initialState = {
     message: '',
     moves: 0,
     grid: ['', '', '', '', 'B', '', '', '', ''],
     activeSquare: 4
   }
 
-  // const [x, y] = getCoordinates(grid);
-  // console.log(`(${x}, ${y})`) // (1 ,2)
-  // Coordinates `(${x}, ${y})`
+  state = this.initialState;
 
   getCoordinates = () => {
     if (this.state.activeSquare === 0) {
@@ -92,6 +89,10 @@ export default class AppClass extends React.Component {
     }
   }
 
+  reset = () => {
+    this.setState(this.initialState);
+  }
+
   render() {
     const { className } = this.props
 
@@ -103,7 +104,6 @@ export default class AppClass extends React.Component {
         </div>
         <div id="grid">
           {this.state.grid.map((letter, index) => letter ? <div className="square active">{letter}</div> : <div key={index} className="square">{letter}</div>)}
-          {/* <div className="square active">B</div> */}
         </div>
         <div className="info">
           <h3 id="message">{this.state.message}</h3>
@@ -113,7 +113,7 @@ export default class AppClass extends React.Component {
           <button id="up" onClick={this.handlePlayerMoveUp}>UP</button>
           <button id="right" onClick={this.handlePlayerMoveRight}>RIGHT</button>
           <button id="down" onClick={this.handlePlayerMoveDown}>DOWN</button>
-          <button id="reset">reset</button>
+          <button id="reset" onClick={this.reset}>reset</button>
         </div>
         <form>
           <input id="email" type="email" placeholder="type email"></input>
