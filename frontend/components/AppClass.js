@@ -13,6 +13,28 @@ export default class AppClass extends React.Component {
   // console.log(`(${x}, ${y})`) // (1 ,2)
   // Coordinates `(${x}, ${y})`
 
+  getCoordinates = () => {
+    if (this.state.activeSquare === 0) {
+      return '(1, 1)';
+    } else if (this.state.activeSquare === 1) {
+      return '(2, 1)';
+    } else if (this.state.activeSquare === 2) {
+      return '(3, 1)';
+    } else if (this.state.activeSquare === 3) {
+      return '(1, 2)';
+    } else if (this.state.activeSquare === 4) {
+      return '(2, 2)';
+    } else if (this.state.activeSquare === 5) {
+      return '(3, 2)';
+    } else if (this.state.activeSquare === 6) {
+      return '(1, 3)';
+    } else if (this.state.activeSquare === 7) {
+      return '(2, 3)';
+    } else {
+      return '(3, 3)';
+    }
+  }
+
   setActiveSquare = (newIndex) => {
     const oldIndex = this.state.activeSquare;
     const updatedGrid = [ ...this.state.grid];
@@ -76,7 +98,7 @@ export default class AppClass extends React.Component {
     return (
       <div id="wrapper" className={className}>
         <div className="info">
-          <h3 id="coordinates">Coordinates (2, 2)</h3>
+          <h3 id="coordinates">Coordinates {this.getCoordinates()}</h3>
           <h3 id="steps">{this.state.moves === 1 ? `You moved ${this.state.moves} time` : `You moved ${this.state.moves} times`}</h3>
         </div>
         <div id="grid">
