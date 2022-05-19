@@ -10,11 +10,16 @@ export default class AppClass extends React.Component {
 
   render() {
     const { className } = this.props
+
+    // const [x, y] = getCoordinates(grid);
+    // console.log(`(${x}, ${y})`) // (1 ,2)
+    // Coordinates `(${x}, ${y})`
+
     return (
       <div id="wrapper" className={className}>
         <div className="info">
           <h3 id="coordinates">Coordinates (2, 2)</h3>
-          <h3 id="steps">You moved 0 times</h3>
+          <h3 id="steps">{`You moved ${this.state.moves} times`}</h3>
         </div>
         <div id="grid">
           {this.state.grid.map((letter, index) => <div key={index} className="square">{letter}</div>)}
