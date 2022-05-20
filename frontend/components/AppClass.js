@@ -41,7 +41,8 @@ export default class AppClass extends React.Component {
       ...this.state,
       grid: updatedGrid,
       moves: this.state.moves + 1,
-      activeSquare: newIndex
+      activeSquare: newIndex,
+      message: ''
     })
   }
 
