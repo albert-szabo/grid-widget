@@ -96,16 +96,6 @@ export default class AppClass extends React.Component {
     }
   }
 
-  // function postTodo(name) {
-  //   axios.post('http://localhost:9000/api/todos', { name })
-  //     .then((res) => {
-  //       setTodos(todos.concat(res.data.data))
-  //     })
-  //     .catch((err) => {
-  //       debugger
-  //     })
-  // }
-
   onChange = (event) => {
     const emailInputValue = event.target.value;
     this.setState({
@@ -124,17 +114,11 @@ export default class AppClass extends React.Component {
     })
       .then((response) => {this.setState({ ...this.state, message: response.data.message })})
       .catch((error) => {this.setState({ ...this.state, message: error.response.data.message })})
-      // .then((response) => console.log(response))
-      // .catch((error) => console.log(error))
-      // .catch((error) => console.error(error))
-      // .finally(() => {this.setState({ ...this.state, emailInput: ''})});
-    // this.setState({ ...this.state, emailInput: ''});
     this.resetEmailInput();
   }
 
   reset = () => {
     this.setState(this.initialState);
-    // this.resetEmailInput();
   }
 
   resetEmailInput = () => {
@@ -174,45 +158,3 @@ export default class AppClass extends React.Component {
     )
   }
 }
-
-
-
-// import React, { useState, useContext } from 'react'
-// import { CountContext } from '../contexts/count'
-// import Form from './Form'
-// import TodoList from './TodoList'
-// import { TodosContext } from '../contexts/todos'
-
-// const initialForm = {
-//   name: '',
-// }
-// const initialState = {
-//   form: initialForm,
-//   displayCompleteds: true,
-// }
-
-// export default function App() {
-//   const { todos, postTodo, patchTodo } = useContext(TodosContext)
-
-//   const onChange = ({ name, value }) => {
-//     setState({ ...state, form: { [name]: value } })
-//   }
-//   const onSubmit = () => {
-//     postTodo(state.form.name)
-//     setState({ ...state, form: initialForm })
-//   }
-
-//   return (
-//     <div>
-//       <div>Count is {count}</div>
-//       <button onClick={inc}>increment</button>
-//       <button onClick={dec}>decrement</button>
-//       <Form
-//         onSubmit={onSubmit}
-//         onChange={onChange}
-//         values={state.form}
-//       />
-//     </div>
-//   )
-// }
-
