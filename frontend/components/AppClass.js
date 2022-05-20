@@ -1,33 +1,39 @@
 import React from 'react'
 
 export default class AppClass extends React.Component {
-  state = {
+  initialState = {
     message: '',
     moves: 0,
     grid: ['', '', '', '', 'B', '', '', '', ''],
     activeSquare: 4
   }
+  
+  state = this.initialState;
+
+  getXCoordinate = () => {
+    if (this.state.activeSquare === 0 || this.state.activeSquare === 3 || this.state.activeSquare === 6) {
+      return 1;
+    } else if (this.state.activeSquare === 1 || this.state.activeSquare === 4 || this.state.activeSquare === 7) {
+      return 2;
+    } else {
+      return 3;
+    }
+  }
+
+  getYCoordinate = () => {
+    if (this.state.activeSquare === 0 || this.state.activeSquare === 1 || this.state.activeSquare === 2) {
+      return 1;
+    } else if (this.state.activeSquare === 3 || this.state.activeSquare === 4 || this.state.activeSquare === 5) {
+      return 2;
+    } else {
+      return 3;
+    }
+  }
 
   getCoordinates = () => {
-    if (this.state.activeSquare === 0) {
-      return '(1, 1)';
-    } else if (this.state.activeSquare === 1) {
-      return '(2, 1)';
-    } else if (this.state.activeSquare === 2) {
-      return '(3, 1)';
-    } else if (this.state.activeSquare === 3) {
-      return '(1, 2)';
-    } else if (this.state.activeSquare === 4) {
-      return '(2, 2)';
-    } else if (this.state.activeSquare === 5) {
-      return '(3, 2)';
-    } else if (this.state.activeSquare === 6) {
-      return '(1, 3)';
-    } else if (this.state.activeSquare === 7) {
-      return '(2, 3)';
-    } else {
-      return '(3, 3)';
-    }
+    const x = this.getXCoordinate();
+    const y = this.getYCoordinate();
+    return `(${x}, ${y})`;
   }
 
   setActiveSquare = (newIndex) => {
@@ -88,14 +94,7 @@ export default class AppClass extends React.Component {
     }
   }
 
-  reset = () => {
-    this.setState({
-      message: '',
-      moves: 0,
-      grid: ['', '', '', '', 'B', '', '', '', ''],
-      activeSquare: 4
-    });
-  }
+  reset = () => {this.setState(this.initialState)}
 
   render() {
     const { className } = this.props
