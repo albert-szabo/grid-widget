@@ -1,13 +1,15 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
 
 export default class AppClass extends React.Component {
   initialState = {
     message: '',
+    emailInput: '',
     moves: 0,
     grid: ['', '', '', '', 'B', '', '', '', ''],
     activeSquare: 4
   }
-  
+
   state = this.initialState;
 
   getXCoordinate = () => {
@@ -94,6 +96,36 @@ export default class AppClass extends React.Component {
     }
   }
 
+  // function postTodo(name) {
+  //   axios.post('http://localhost:9000/api/todos', { name })
+  //     .then((res) => {
+  //       setTodos(todos.concat(res.data.data))
+  //     })
+  //     .catch((err) => {
+  //       debugger
+  //     })
+  // }
+
+  onChange = (event) => {
+    const emailInputValue = event.target.value;
+    this.setState({
+      ...this.state,
+      emailInput: emailInputValue
+    })
+  }
+
+  onSubmit = (event) => {
+    event.preventDefault();
+    axios.post('http://localhost:9000/api/result', {
+      'x': this.getXCoordinate(),
+      'y': this.getYCoordinate(),
+      'steps': this.state.moves,
+      'email': this.state.emailInput
+    })
+      .then((response) => {this.setState({ ...this.state, message: response.data.message })})
+      .catch((error) => console.error(error))
+  }
+
   reset = () => {this.setState(this.initialState)}
 
   render() {
@@ -118,11 +150,53 @@ export default class AppClass extends React.Component {
           <button id="down" onClick={this.handlePlayerMoveDown}>DOWN</button>
           <button id="reset" onClick={this.reset}>reset</button>
         </div>
-        <form>
-          <input id="email" type="email" placeholder="type email"></input>
+        <form onSubmit={this.onSubmit}>
+          <input id="email" type="email" placeholder="type email" onChange={this.onChange}></input>
           <input id="submit" type="submit"></input>
         </form>
       </div>
     )
   }
 }
+
+
+
+// import React, { useState, useContext } from 'react'
+// import { CountContext } from '../contexts/count'
+// import Form from './Form'
+// import TodoList from './TodoList'
+// import { TodosContext } from '../contexts/todos'
+
+// const initialForm = {
+//   name: '',
+// }
+// const initialState = {
+//   form: initialForm,
+//   displayCompleteds: true,
+// }
+
+// export default function App() {
+//   const { todos, postTodo, patchTodo } = useContext(TodosContext)
+
+//   const onChange = ({ name, value }) => {
+//     setState({ ...state, form: { [name]: value } })
+//   }
+//   const onSubmit = () => {
+//     postTodo(state.form.name)
+//     setState({ ...state, form: initialForm })
+//   }
+
+//   return (
+//     <div>
+//       <div>Count is {count}</div>
+//       <button onClick={inc}>increment</button>
+//       <button onClick={dec}>decrement</button>
+//       <Form
+//         onSubmit={onSubmit}
+//         onChange={onChange}
+//         values={state.form}
+//       />
+//     </div>
+//   )
+// }
+
