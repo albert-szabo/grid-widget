@@ -124,6 +124,8 @@ export default class AppClass extends React.Component {
     })
       .then((response) => {this.setState({ ...this.state, message: response.data.message })})
       .catch((error) => console.error(error))
+      // .finally(() => {this.setState({ ...this.state, emailInput: ''})});
+    // this.setState({ ...this.state, emailInput: ''});
   }
 
   reset = () => {this.setState(this.initialState)}
@@ -151,7 +153,7 @@ export default class AppClass extends React.Component {
           <button id="reset" onClick={this.reset}>reset</button>
         </div>
         <form onSubmit={this.onSubmit}>
-          <input id="email" type="email" placeholder="type email" onChange={this.onChange}></input>
+          <input id="email" type="text" placeholder="type email" onChange={this.onChange}></input>
           <input id="submit" type="submit"></input>
         </form>
       </div>
