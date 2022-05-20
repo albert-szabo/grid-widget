@@ -123,7 +123,10 @@ export default class AppClass extends React.Component {
       'email': this.state.emailInput
     })
       .then((response) => {this.setState({ ...this.state, message: response.data.message })})
-      .catch((error) => console.error(error))
+      .catch((error) => {this.setState({ ...this.state, message: error.response.data.message })})
+      // .then((response) => console.log(response))
+      // .catch((error) => console.log(error))
+      // .catch((error) => console.error(error))
       // .finally(() => {this.setState({ ...this.state, emailInput: ''})});
     // this.setState({ ...this.state, emailInput: ''});
   }
