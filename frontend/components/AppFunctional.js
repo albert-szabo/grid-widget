@@ -104,13 +104,6 @@ export default function AppFunctional(props) {
     })
   }
 
-  const resetEmailInput = () => {
-    setState({
-      ...state,
-      emailInput: ''
-    })
-  }
-
   const onSubmit = (event) => {
     event.preventDefault();
     axios.post('http://localhost:9000/api/result', {
@@ -121,7 +114,6 @@ export default function AppFunctional(props) {
     })
       .then((response) => {setState({ ...state, message: response.data.message, emailInput: '' })})
       .catch((error) => {setState({ ...state, message: error.response.data.message })})
-    resetEmailInput();
   }
 
   const reset = () => {
