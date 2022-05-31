@@ -104,6 +104,13 @@ export default function AppFunctional(props) {
     })
   }
 
+  const resetEmailInput = () => {
+    setState({
+      ...state,
+      emailInput: ''
+    })
+  }
+
   const onSubmit = (event) => {
     event.preventDefault();
     axios.post('http://localhost:9000/api/result', {
@@ -112,28 +119,13 @@ export default function AppFunctional(props) {
       'steps': state.moves,
       'email': state.emailInput
     })
-      .then((response) => {setState({ ...state, message: response.data.message })})
+      .then((response) => {setState({ ...state, message: response.data.message, emailInput: '' })})
       .catch((error) => {setState({ ...state, message: error.response.data.message })})
-      setState({
-        ...state,
-        emailInput: ''
-      })
-    console.log('Before the function:', state);
     resetEmailInput();
-    console.log('After the function:', state);
   }
 
   const reset = () => {
     setState(initialState);
-  }
-
-  const resetEmailInput = () => {
-    console.log('Inside the start of the function:', state);
-    setState({
-      ...state,
-      emailInput: ''
-    })
-    console.log('Inside the end of the function:', state);
   }
 
   return (
